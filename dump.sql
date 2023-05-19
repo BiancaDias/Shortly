@@ -28,7 +28,8 @@ CREATE TABLE public.users (
     id integer NOT NULL,
     name text NOT NULL,
     email text NOT NULL,
-    password text NOT NULL
+    password text NOT NULL,
+    "createdAt" timestamp without time zone DEFAULT CURRENT_TIMESTAMP
 );
 
 
@@ -63,15 +64,14 @@ ALTER TABLE ONLY public.users ALTER COLUMN id SET DEFAULT nextval('public.users_
 -- Data for Name: users; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-INSERT INTO public.users VALUES (1, 'João', 'joao@driven.com.br', 'driven');
-INSERT INTO public.users VALUES (4, 'Bianca', 'bianca@driven.com.br', '$2b$10$rPKHEJHn0CMLEUaf9mx2nuwjHsPSZWxER6O2xIINZzrPh69jcNuq2');
+INSERT INTO public.users VALUES (1, 'Bianca', 'bianca@driven.com.br', '$2b$10$5qSCAVoKqPt/EZ7qu1VMs.dHusIVarr/aqa4EW.q7B/REXezT.JCW', '2023-05-19 11:53:25.138931');
 
 
 --
 -- Name: users_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public.users_id_seq', 4, true);
+SELECT pg_catalog.setval('public.users_id_seq', 1, true);
 
 
 --
