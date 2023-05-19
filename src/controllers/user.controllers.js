@@ -25,7 +25,15 @@ export async function singIn(req, res){
     const { email, password } = req.body;
     try{
         const ver = await db.query(`SELECT * FROM users WHERE email = $1;`, [email]);
-        if(!ver) return res.sendStatus(401)
+        if(ver.rowCount === 0) return res.sendStatus(401);
+        const verPassword = bcrypt.compareSync(password, ver.rows[0].password);
+        if(!verPassword) return res.sendStatus(401);
+
+        const token = uuid();
+
+        await db.query(`INSERT INTO registered ("idUser", token) VALUES ($1, $2);`, [ver.rows[0].id, token])
+        const bodyToken = {token: token}
+        res.status(200).send(bodyToken);
     }catch (err) {
         res.status(500).send(err.message);
     }
