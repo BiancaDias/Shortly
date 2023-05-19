@@ -13,7 +13,7 @@ export async function shorten(req, res){
             id: userFind.idUser,
             shortUrl: shortId
         }
-        res.status(200).send(body)
+        res.status(201).send(body)
     }catch(err){
         res.status(500).send(err);
     }
