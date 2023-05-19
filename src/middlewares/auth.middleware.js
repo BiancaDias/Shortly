@@ -7,7 +7,7 @@ export async function authValidation(req, res, next){
     if (!token) return res.sendStatus(401);
     try{
         const user = await db.query(`SELECT * FROM registered WHERE token = $1;`, [token])
-      
+        if(user.rowCount === 0) return res.sendStatus(401);
         res.locals.userFind = user.rows[0];
         next()
     }catch(err){
