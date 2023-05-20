@@ -38,3 +38,31 @@ export async function singIn(req, res){
         res.status(500).send(err.message);
     }
 }
+
+export async function usersMe(req, res){
+    const userFind = res.locals.userFind;
+    try{
+        const linksUser = await db.query(`SELECT * FROM urls WHERE "userId" = $1;`,[userFind.idUser]);
+        const user = await db.query(`SELECT * FROM users WHERE id = $1;`, [userFind.idUser])
+        const visits = await db.query(`SELECT SUM(visits) AS totalVisits FROM urls WHERE "userId" = $1;`, [userFind.idUser]);
+
+        const links = linksUser.rows.map((l) =>({
+            id: l.id,
+            shortUrl: l.url_shortly,
+            url: l.url_original,
+            visitCount: l.visits
+
+        }))
+
+        const body = {
+            id: userFind.idUser,
+            name: user.rows[0].name,
+            visitCount: visits.rows[0].totalvisits,
+            shortenedUrls: links
+        }
+        return res.status(200).send(body)
+
+    }catch (err) {
+        res.status(500).send(err.message);
+    }
+}
