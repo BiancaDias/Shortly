@@ -155,6 +155,9 @@ INSERT INTO public.registered VALUES (5, 5, '008b7a09-dff5-4c25-b262-adacd883c7a
 --
 
 INSERT INTO public.urls VALUES (1, '2023-05-19 15:45:18.267551', 1, 'https://driven.com', 'BF-dbr4f');
+INSERT INTO public.urls VALUES (2, '2023-05-19 15:47:18.596263', 1, 'https://driven.com', 'TvEW76_b');
+INSERT INTO public.urls VALUES (3, '2023-05-19 18:45:32.798854', 1, 'https://driven.com', 'QesjBPQb');
+INSERT INTO public.urls VALUES (4, '2023-05-19 18:45:43.883324', 1, 'https://driven.com', 'bGMq2Su2');
 
 
 --
@@ -177,7 +180,7 @@ SELECT pg_catalog.setval('public.registered_id_seq', 5, true);
 -- Name: urls_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public.urls_id_seq', 1, true);
+SELECT pg_catalog.setval('public.urls_id_seq', 4, true);
 
 
 --

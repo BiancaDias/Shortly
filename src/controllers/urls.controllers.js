@@ -18,3 +18,19 @@ export async function shorten(req, res){
         res.status(500).send(err);
     }
 }
+
+export async function urlsId(req, res){
+    const { id } = req.params;
+    try{
+        const url = await db.query(`SELECT * FROM urls WHERE id = $1;`, [id]);
+        if(url.rowCount === 0) return res.sendStatus(404);
+        const body = {
+            id: url.rows[0].id,
+            shortUrl: url.rows[0].url_shortly,
+            url: url.rows[0].url_original
+        }
+        res.status(200).send(body)
+    }catch(err){
+        res.status(500).send(err);
+    }
+}
