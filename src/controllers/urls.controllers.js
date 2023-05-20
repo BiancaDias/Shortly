@@ -34,3 +34,17 @@ export async function urlsId(req, res){
         res.status(500).send(err);
     }
 }
+
+export async function openUrl(req, res){
+    const { shortUrl } = req.params;
+    try{
+        const url = await db.query(`SELECT * FROM urls WHERE url_shortly = $1;`, [shortUrl]);
+        if(url.rowCount === 0) return res.sendStatus(404);
+
+        await db.query(`UPDATE urls SET visits = visits + 1 WHERE url_shortly = $1;`, [shortUrl])
+        res.redirect(url.rows[0].url_original);
+    }catch(err){
+        res.status(500).send(err);
+    }
+
+}

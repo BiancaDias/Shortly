@@ -61,7 +61,8 @@ CREATE TABLE public.urls (
     "createdAt" timestamp without time zone DEFAULT CURRENT_TIMESTAMP,
     "userId" integer NOT NULL,
     url_original text NOT NULL,
-    url_shortly text NOT NULL
+    url_shortly text NOT NULL,
+    visits integer DEFAULT 0 NOT NULL
 );
 
 
@@ -154,10 +155,12 @@ INSERT INTO public.registered VALUES (5, 5, '008b7a09-dff5-4c25-b262-adacd883c7a
 -- Data for Name: urls; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-INSERT INTO public.urls VALUES (1, '2023-05-19 15:45:18.267551', 1, 'https://driven.com', 'BF-dbr4f');
-INSERT INTO public.urls VALUES (2, '2023-05-19 15:47:18.596263', 1, 'https://driven.com', 'TvEW76_b');
-INSERT INTO public.urls VALUES (3, '2023-05-19 18:45:32.798854', 1, 'https://driven.com', 'QesjBPQb');
-INSERT INTO public.urls VALUES (4, '2023-05-19 18:45:43.883324', 1, 'https://driven.com', 'bGMq2Su2');
+INSERT INTO public.urls VALUES (1, '2023-05-20 11:30:04.546661', 5, 'https://driven.com', 'GM4nJfh8', 0);
+INSERT INTO public.urls VALUES (2, '2023-05-20 11:30:08.129875', 5, 'https://driven.com', '9vzJQIog', 0);
+INSERT INTO public.urls VALUES (3, '2023-05-20 11:30:08.646589', 5, 'https://driven.com', '4W412zZj', 0);
+INSERT INTO public.urls VALUES (4, '2023-05-20 11:30:09.179002', 5, 'https://driven.com', 'ZUsbDqQ7', 0);
+INSERT INTO public.urls VALUES (5, '2023-05-20 11:30:10.078767', 5, 'https://driven.com', 'RUQ2E0xb', 0);
+INSERT INTO public.urls VALUES (6, '2023-05-20 11:51:22.493114', 5, 'https://www.google.com/', 'v1pc3Jgj', 3);
 
 
 --
@@ -180,7 +183,7 @@ SELECT pg_catalog.setval('public.registered_id_seq', 5, true);
 -- Name: urls_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public.urls_id_seq', 4, true);
+SELECT pg_catalog.setval('public.urls_id_seq', 6, true);
 
 
 --
