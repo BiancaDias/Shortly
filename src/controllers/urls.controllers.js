@@ -64,3 +64,19 @@ export async function deleteUrl(req, res){
         res.status(500).send(err);
     }
 }
+
+export async function getRanking(req, res){
+    try{
+        const ranking = await db.query(`
+            SELECT u.id, u.name, COUNT(urls.id) AS linksCount, COALESCE(SUM(urls.visits), 0) AS visitCount
+            FROM users u
+            LEFT JOIN urls ON u.id = urls."userId"
+            GROUP BY u.id, u.name
+            ORDER BY visitCount DESC
+            LIMIT 10;
+        `)
+        res.status(200).send(ranking.rows);
+    }catch(err){
+        res.status(500).send(err);
+    }
+}
